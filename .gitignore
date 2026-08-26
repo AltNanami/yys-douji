@@ -1,0 +1,6 @@
+# IDEA 的个人工作区设置不属于网站文件，不上传到 GitHub。
+.idea/
+
+# Windows 临时文件。
+Thumbs.db
+Desktop.ini

@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f5f7f4" />
+    <title>御魂配置 · 斗技对策簿</title>
+    <link rel="stylesheet" href="./styles.css?v=20260825-7" />
+    <link rel="stylesheet" href="./yuhun.css?v=20260825-7" />
+  </head>
+  <body class="table-page">
+    <!-- 御魂页复用总览页外壳，只有主区域的内容和脚本不同。 -->
+    <div class="app-shell">
+      <aside class="sidebar" id="sidebar" aria-label="页面导航">
+        <div class="brand-lockup">
+          <div class="brand-mark" aria-hidden="true">斗</div>
+          <div class="brand-copy">
+            <p class="eyebrow">ONMYOJI / PVP</p>
+            <h1>斗技对策簿</h1>
+          </div>
+          <button class="sidebar-toggle" id="sidebar-toggle" type="button" aria-expanded="true" aria-controls="sidebar-collapsible" title="收起侧边栏">
+            <span aria-hidden="true">‹</span>
+            <span class="visually-hidden">收起侧边栏</span>
+          </button>
+        </div>
+
+        <!-- 与首页共用同一套侧边栏折叠逻辑。 -->
+        <div class="sidebar-collapsible" id="sidebar-collapsible">
+          <div class="sidebar-intro">
+            <span class="status-dot"></span>
+            <span>资料页</span>
+            <span class="sidebar-count">02</span>
+          </div>
+
+          <nav class="side-page-nav" aria-label="资料页导航">
+            <a class="side-page-link" href="./index.html"><span class="side-page-index">01</span><span>对策总览</span><span class="side-page-arrow">→</span></a>
+            <a class="side-page-link active" href="./yuhun.html" aria-current="page"><span class="side-page-index">02</span><span>御魂配置</span><span class="side-page-arrow">↗</span></a>
+          </nav>
+
+          <div class="sidebar-footer">
+            <div class="legend-row"><span class="legend-swatch enemy"></span> 对策总览</div>
+            <div class="legend-row"><span class="legend-swatch counter"></span> 御魂配置</div>
+            <p class="sidebar-hint">表格数据单独维护，改配置不需要调整页面结构。</p>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <!-- 标题区域显示当前页面名称和筛选后的行数。 -->
+        <header class="topbar yuhun-topbar">
+          <div class="topbar-heading">
+            <p class="eyebrow">BUILD SHEET / YUHUN</p>
+            <h2>御魂配置</h2>
+            <p class="topbar-subtitle">把速度门槛、主属性和用途备注收在一张可检索的配置表里。</p>
+          </div>
+          <div class="topbar-actions">
+            <a class="back-link" href="./index.html" title="返回对策总览">← 总览</a>
+            <div class="stat-chip"><span id="row-count">0</span><small>条配置</small></div>
+            <button class="icon-button" id="clear-search" type="button" title="清空搜索" aria-label="清空搜索">×</button>
+          </div>
+        </header>
+
+        <!-- 来源信息固定显示，提醒用户当前页面由几张独立表组成。 -->
+        <section class="source-strip" aria-label="资料来源">
+          <div>
+            <p class="source-kicker">资料来源</p>
+            <strong id="source-summary">已载入 2 张御魂配置表</strong>
+          </div>
+          <div class="source-meta"><span>每张表可独立收起 / 展开</span><span class="source-divider">·</span><span>当前筛选会跨表生效</span></div>
+        </section>
+
+        <!-- 统计卡片使用全量数据，不随当前搜索词改变。 -->
+        <section class="table-insight" aria-label="配置概览">
+          <div class="insight-item"><span class="insight-label">全部配置</span><strong id="total-count">0</strong></div>
+          <div class="insight-item"><span class="insight-label">高速式神</span><strong id="speed-count">0</strong></div>
+          <div class="insight-item"><span class="insight-label">输出式神</span><strong id="damage-count">0</strong></div>
+          <div class="insight-item"><span class="insight-label">辅助 / 备选</span><strong id="support-count">0</strong></div>
+        </section>
+
+        <!-- 搜索和角色筛选会同时作用于所有已注册表格。 -->
+        <section class="table-controls" aria-label="表格筛选">
+          <label class="search-box" for="search-input">
+            <span class="search-icon" aria-hidden="true">⌕</span>
+            <input id="search-input" type="search" placeholder="搜索式神、御魂、速度或备注" autocomplete="off" />
+          </label>
+          <div class="filter-group" id="role-filters" role="group" aria-label="角色分组筛选"></div>
+          <div class="table-actions" role="group" aria-label="表格展开控制">
+            <button class="text-button" id="collapse-all-tables" type="button">− 全部收起</button>
+            <button class="text-button" id="expand-all-tables" type="button">＋ 全部展开</button>
+          </div>
+        </section>
+
+        <div class="table-status"><span id="table-status-text" aria-live="polite">显示全部配置</span><span class="table-status-hint">横向滚动可查看完整备注</span></div>
+
+        <!-- yuhun.js 按筛选结果把每张表渲染到这里。 -->
+        <section id="table-list" class="table-list" aria-label="御魂配置表列表"></section>
+
+        <section class="source-note-panel">
+          <span class="source-note-mark">注</span>
+          <p id="source-footer-note">各配置表保留原始资料中的速度、属性和用途说明，后续新增表格时在数据文件中注册即可。</p>
+        </section>
+
+        <footer class="page-footer">
+          <a href="./index.html">斗技对策簿</a>
+          <span class="footer-separator">·</span>
+          <span>御魂配置独立页</span>
+        </footer>
+      </main>
+    </div>
+
+    <script type="module" src="./yuhun.js"></script>
+  </body>
+</html>

@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f5f7f4" />
+    <title>斗技对策簿 · Onmyoji PvP</title>
+    <link rel="stylesheet" href="./styles.css?v=20260825-7" />
+  </head>
+  <body>
+    <!-- 统一外壳：侧栏负责导航，主区域负责搜索和卡片内容。 -->
+    <div class="app-shell">
+      <aside class="sidebar" id="sidebar" aria-label="攻略板块导航">
+        <!-- 品牌区固定显示，不随筛选结果变化。 -->
+        <div class="brand-lockup">
+          <div class="brand-mark" aria-hidden="true">斗</div>
+          <div class="brand-copy">
+            <p class="eyebrow">ONMYOJI / PVP</p>
+            <h1>斗技对策簿</h1>
+          </div>
+          <button class="sidebar-toggle" id="sidebar-toggle" type="button" aria-expanded="true" aria-controls="sidebar-collapsible" title="收起侧边栏">
+            <span aria-hidden="true">‹</span>
+            <span class="visually-hidden">收起侧边栏</span>
+          </button>
+        </div>
+
+        <!-- 此区域由 sidebar.js 统一控制收起和展开。 -->
+        <div class="sidebar-collapsible" id="sidebar-collapsible">
+          <div class="sidebar-intro">
+            <span class="status-dot"></span>
+            <span>已载入全部对策</span>
+            <span class="sidebar-count" id="sidebar-count">0</span>
+          </div>
+
+          <!-- “对策总览”是独立导航组，可手动隐藏八个对策分类。 -->
+          <button class="sidebar-group-toggle" id="strategy-nav-toggle" type="button" aria-expanded="true" aria-controls="section-nav">
+            <span class="sidebar-group-icon" aria-hidden="true">⌄</span>
+            <span>对策总览</span>
+            <span class="sidebar-group-count" id="strategy-nav-count">0</span>
+          </button>
+
+          <!-- app.js 根据 data/ 下的板块数据生成导航按钮。 -->
+          <nav id="section-nav" class="section-nav"></nav>
+
+          <!-- 独立御魂页入口，避免把大表格塞进总览页。 -->
+          <a class="side-page-link" href="./yuhun.html">
+            <span class="side-page-index">02</span>
+            <span>御魂配置</span>
+            <span class="side-page-arrow">↗</span>
+          </a>
+
+          <div class="sidebar-footer">
+            <div class="legend-row"><span class="legend-swatch enemy"></span> 对面常见</div>
+            <div class="legend-row"><span class="legend-swatch counter"></span> 我方对策</div>
+            <p class="sidebar-hint">资料与页面分离，改阵容只需编辑对应数据文件。</p>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <!-- 顶部标题和实时对策数量。 -->
+        <header class="topbar">
+          <div class="topbar-heading">
+            <p class="eyebrow">PVP COUNTER PLAYBOOK</p>
+            <h2>看对面，上对策</h2>
+            <p class="topbar-subtitle">把常见先手、坐地与挖土阵容整理成一眼能扫完的出场卡。</p>
+          </div>
+          <div class="topbar-actions">
+            <div class="stat-chip"><span id="result-count">0</span><small>条对策</small></div>
+            <button class="icon-button" id="clear-search" type="button" title="清空搜索" aria-label="清空搜索">×</button>
+          </div>
+        </header>
+
+        <!-- 所有筛选控件使用事件委托，动态重绘后仍保持可用。 -->
+        <section class="control-bar" aria-label="筛选与搜索">
+          <label class="search-box" for="search-input">
+            <span class="search-icon" aria-hidden="true">⌕</span>
+            <input id="search-input" type="search" placeholder="搜索式神、阵容或备注" autocomplete="off" />
+          </label>
+          <div class="filter-group" id="mode-filters" role="group" aria-label="阵容类型筛选">
+            <button class="filter-button active" data-filter="all" aria-pressed="true" type="button">全部</button>
+            <button class="filter-button" data-filter="抢速" aria-pressed="false" type="button">抢速</button>
+            <button class="filter-button" data-filter="坐地" aria-pressed="false" type="button">坐地</button>
+            <button class="filter-button" data-filter="挖土" aria-pressed="false" type="button">挖土</button>
+          </div>
+          <div class="section-actions" role="group" aria-label="板块展开控制">
+            <button class="text-button" id="collapse-all-sections" type="button">− 全部收起</button>
+            <button class="text-button" id="expand-all-sections" type="button">＋ 全部展开</button>
+          </div>
+        </section>
+
+        <div class="mobile-section-picker">
+          <label for="mobile-section">当前板块</label>
+          <select id="mobile-section"></select>
+        </div>
+
+        <!-- app.js 会根据当前搜索条件重绘这里的板块和对策卡。 -->
+        <section id="content" class="content-stack" aria-live="polite"></section>
+
+        <footer class="page-footer">
+          <span>斗技对策簿</span>
+          <span class="footer-separator">·</span>
+          <span>资料以实战习惯为准，按需调整御魂与速度</span>
+        </footer>
+      </main>
+    </div>
+
+    <!-- 版本参数用于静态页面更新后绕过浏览器旧脚本缓存。 -->
+    <script type="module" src="./app.js?v=20260825-5"></script>
+  </body>
+</html>
