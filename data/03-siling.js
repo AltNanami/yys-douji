@@ -22,6 +22,12 @@ export const section = {
       tags: ["坐地"],
       enemy: ["思铃骷 / 入内雀 + 吞 / 桃 / 泷 / 灵 / 孔 / 阎 / 卑"],
       counter: ["神龙平孔 + 帝 / 封 / 市"]
+    },
+    {
+      title: "吸思骷泷熊",
+      tags: ["坐地"],
+      enemy: ["吸思骷泷熊"],
+      counter: ["神平骷吸象"]
     }
   ]
 };

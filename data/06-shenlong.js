@@ -17,6 +17,12 @@ export const section = {
       tags: ["抢速"],
       enemy: ["神龙平 + 阎 / 面 / 云 / 泷 / 目"],
       counter: ["神龙平面 + 白 / 桃 / 云 / 封"]
+    },
+    {
+      title: "神龙平阎桃",
+      tags: ["抢速"],
+      enemy: ["神龙平阎桃"],
+      counter: ["神龙平云熊"]
     }
   ]
 };

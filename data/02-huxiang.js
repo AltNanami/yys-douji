@@ -27,6 +27,18 @@ export const section = {
           { text: "警惕偷星熊,若吸血姬 + 入内雀,才上鹿", important: true },
           { text: "若吸血姬 + 入内雀,才上鹿", important: true }
       ]
+    },
+    {
+      title: "骷吸神桃象",
+      tags: ["坐地"],
+      enemy: ["骷吸神桃象"],
+      counter: ["神龙平面 + 孔雀"]
+    },
+    {
+      title: "狐平帝猫 + 大白",
+      tags: ["坐地"],
+      enemy: ["狐平帝猫 + 大白"],
+      counter: ["离封火山桃"]
     }
   ]
 };

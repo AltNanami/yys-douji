@@ -28,6 +28,12 @@ export const section = {
       tags: ["挖土"],
       enemy: ["因面龙歌"],
       counter: ["神龙平面 + 老头"]
+    },
+    {
+      title: "吞雪因面封",
+      tags: ["挖土"],
+      enemy: ["吞雪因面封"],
+      counter: ["神龙平白面"]
     }
   ]
 };
